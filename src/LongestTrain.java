@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class LongestTrain
 {
+    public static final int LOTS_OF_DOUBLES = 9;
+
     public static void main(String[] args)
     {
         Scanner scan = new Scanner(System.in);
@@ -63,5 +65,18 @@ public class LongestTrain
         }
 
         return bestTrain;
+    }
+
+    public static boolean isSlowHand(DominoHand hand)
+    {
+        int count = 0;
+        int i;
+        for (i = 0; i < hand.remaining(); i++)
+        {
+            if (hand.get(i).isDouble())
+                count++;
+        }
+
+        return count > LOTS_OF_DOUBLES;
     }
 }

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+@SuppressWarnings("unchecked")
 public class HandSelectorPanel extends JPanel
 {
     private static final int MAX_HAND_SIZE = 12;

@@ -47,18 +47,33 @@ public class DominoGui extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-            DominoTrain train = handSelector.getBestTrain();
+            boolean calculate = true;
 
-            if (train.length() > 0)
+            if (LongestTrain.isSlowHand(handSelector.getHand()))
             {
-                TrainFrame frame = new TrainFrame(train);
-                frame.setVisible(true);
+                int choice = JOptionPane.showConfirmDialog(null,
+                "This hand contains many doubles, which will make this process"
+                + "\ntake a very long time.  Are you sure you want to proceed?",
+                    "Inefficiency Warning", JOptionPane.YES_NO_OPTION);
+
+                calculate = choice == JOptionPane.YES_OPTION;
             }
-            else
+
+            if (calculate)
             {
-                JOptionPane.showMessageDialog(DominoGui.this,
-                    "No train can be made.", "Best Train",
-                    JOptionPane.ERROR_MESSAGE);
+                DominoTrain train = handSelector.getBestTrain();
+
+                if (train.length() > 0)
+                {
+                    TrainFrame frame = new TrainFrame(train);
+                    frame.setVisible(true);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(DominoGui.this,
+                        "No train can be made.", "Best Train",
+                        JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
