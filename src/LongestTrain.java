@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class LongestTrain
 {
     public static final int LOTS_OF_DOUBLES = 9;
+    public static final int LOTS_OF_DUPES = 4;
 
     public static void main(String[] args)
     {
@@ -69,14 +70,26 @@ public class LongestTrain
 
     public static boolean isSlowHand(DominoHand hand)
     {
-        int count = 0;
+        int doubles = 0;
+        int maxdupes = 0;
+        int dupes;
         int i;
+        int j;
         for (i = 0; i < hand.remaining(); i++)
         {
             if (hand.get(i).isDouble())
-                count++;
+                doubles++;
+
+            dupes = 0;
+            for (j = i + 1; j < hand.remaining(); j++)
+            {
+                if (hand.get(i).equals(hand.get(j)))
+                    dupes++;
+            }
+            if (dupes > maxdupes)
+                maxdupes = dupes;
         }
 
-        return count > LOTS_OF_DOUBLES;
+        return doubles > LOTS_OF_DOUBLES || maxdupes > LOTS_OF_DUPES;
     }
 }
