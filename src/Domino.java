@@ -68,6 +68,12 @@ public class Domino
         return new Domino(left, right);
     }
 
+    public boolean equals(Domino other)
+    {
+        return (this.left == other.left && this.right == other.right)
+            || (this.right == other.left && this.left == other.right);
+    }
+
     public String toString()
     {
         return "[" + left + ", " + right + "]";
